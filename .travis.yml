@@ -1,7 +1,10 @@
 language: python
 python:
- - 3.6-dev
+- 3.6-dev
 cache: pip
+install:
+- python setup.py develop
+script: pytest
 env:
   global:
   - GOOGLE_APPLICATION_CREDENTIALS="gcloud_credentials.json"
@@ -10,8 +13,3 @@ env:
 before_install:
 - openssl aes-256-cbc -K $encrypted_fcaadfacf017_key -iv $encrypted_fcaadfacf017_iv
   -in gcloud_credentials.json.enc -out gcloud_credentials.json -d
-install:
- - python setup.py develop
-script: pytest
-after_success:
- - codecov
